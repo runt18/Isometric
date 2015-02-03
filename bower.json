@@ -1,0 +1,23 @@
+{
+  "name": "isometric",
+  "version": "0.0.1",
+  "homepage": "https://github.com/lavelle/isometric",
+  "authors": [
+    "Giles Lavelle <giles.lavelle@gmail.com>"
+  ],
+  "description": "Cube game",
+  "main": "js/main.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "threejs": "*",
+    "stats.js": "*"
+  }
+}
