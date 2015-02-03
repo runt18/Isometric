@@ -20,10 +20,12 @@ $(document).ready(function(){
     var secs = 0,
         hundredths = 0;
 
-    var stats = new Stats(),
-        fpsCounter = $(stats.getDomElement()).addClass('fps');
+    var stats = new Stats();
+    var fpsCounter = $(stats.domElement).addClass('fps');
     $('body').append(fpsCounter);
-    window.setInterval(function(){ stats.update(); }, 1000 / 60);
+    window.setInterval(function(){
+        stats.update();
+    }, 1000 / 60);
 
     startTimer = function(){
         secs = 0;
@@ -83,7 +85,7 @@ $(document).ready(function(){
 
             playercube = addCube(cubeSize, playerdata.position, false, true, playerdata.texture);
             goalcube = addCube(cubeSize, goaldata.position, goaldata.colour, true);
-            
+
             moveCamera();
 
             //console.log(freeSpaces);
@@ -96,7 +98,7 @@ $(document).ready(function(){
             }
 
             loadMusic();
-            
+
         });
         startTimer();
     };
@@ -105,7 +107,7 @@ $(document).ready(function(){
     var parseWorld = function(){
         var i, j, k,
             layer, line, cell;
-        
+
         for (i = 0; i < dimensions.y; i++) {
             layer = world[i];
 
@@ -121,7 +123,7 @@ $(document).ready(function(){
                             if(i > 0 && world[i - 1][j][k] !== '0'){
                                 freeSpaces.push({ x : j, y: i, z: k });
                             }
-                            
+
                             break;
                         case 'p':
                             startPos = {x : j, y: i, z: k};
@@ -176,7 +178,7 @@ $(document).ready(function(){
         oldTime = time;
 
         checkKeyboard();
-        
+
         var numEntities = animalscubes.length + 1;
         for (i = 0; i < numEntities; i++) {
             var entity, data;
@@ -243,7 +245,7 @@ $(document).ready(function(){
         // if (tick % 20 === 0){
 
         // }
-        
+
     };
 
     var die = function(){
@@ -261,7 +263,7 @@ $(document).ready(function(){
     };
 
     var moveCamera = function(){
-        camera.position = cameraOffset.clone().addSelf(playerdata.position);
+        camera.position = cameraOffset.clone().add(playerdata.position);
         camera.lookAt(playerdata.position);
     };
 
@@ -313,8 +315,8 @@ $(document).ready(function(){
     };
 
     var addCube = function(size, position, colour, shadows, texture){
-        geometry = new THREE.CubeGeometry(size, size, size);
-        
+        geometry = new THREE.BoxGeometry(size, size, size);
+
         var args = {
             shading: THREE.SmoothShading
         };
@@ -333,8 +335,8 @@ $(document).ready(function(){
         mesh.receiveShadow = true;
         //mesh.overdraw = true;
 
-        mesh.position.addSelf(position);
-        
+        mesh.position.add(position);
+
         scene.add(mesh);
 
         return mesh;
@@ -353,7 +355,7 @@ $(document).ready(function(){
                 light = new THREE.AmbientLight();
                 break;
         }
-        
+
         scene.add(light);
         return light;
     };

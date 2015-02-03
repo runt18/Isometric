@@ -17,7 +17,7 @@ var Entity = function(){
 
         q = {x: p.x, y: p.y, z: p.z};
         q[axis] += direction;
-        
+
         //Check that the cube is within the bounds of the world
         if (
             q.x < 0 || q.x >= dimensions.x ||
@@ -66,8 +66,8 @@ Animal.prototype.constructor = Animal;
 function Player(x, y, z){
     this.arrayPosition = new THREE.Vector3(x, y, z);
     this.position = new THREE.Vector3();
-    
-    this.position.addSelf(this.arrayPosition);
+
+    this.position.add(this.arrayPosition);
     this.position.multiplyScalar(cubeSize);
     this.colour = 0xff0000;
     this.texture = textures.player;
@@ -77,7 +77,7 @@ function Animal(x, y, z){
     this.arrayPosition = new THREE.Vector3(x, y, z);
 
     this.position = new THREE.Vector3();
-    this.position.addSelf(this.arrayPosition);
+    this.position.add(this.arrayPosition);
     this.position.multiplyScalar(cubeSize);
 
     this.colour = Random.colour();
@@ -88,7 +88,7 @@ function Animal(x, y, z){
 var Goal = function(x, y, z){
     this.arrayPosition = new THREE.Vector3(x, y, z);
     this.position = new THREE.Vector3();
-    this.position.addSelf(this.arrayPosition);
+    this.position.add(this.arrayPosition);
     this.position.multiplyScalar(cubeSize);
     this.height = cubeSize;
     this.colour = 0xD4AF37; //gold

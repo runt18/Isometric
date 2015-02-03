@@ -1,8 +1,3 @@
-# Source files. Order matters.
-coffees = [
-  'main'
-]
-
 module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
@@ -16,11 +11,6 @@ module.exports = (grunt) ->
           'build/js/vendor.js': [
             'vendor/jquery/jquery.js'
           ]
-
-    coffee:
-      compile:
-        files:
-          'js/all.js': ("coffee/#{coffee}.coffee" for coffee in coffees)
 
     stylus:
       compile:
@@ -45,6 +35,7 @@ module.exports = (grunt) ->
       server:
         options:
           keepalive: true
+          port: 8005
 
     copy:
       main:
@@ -62,10 +53,4 @@ module.exports = (grunt) ->
           dest: 'build'
         ]
 
-  contribs = ['coffee', 'stylus', 'watch', 'connect', 'clean', 'jst', 'copy', 'uglify']
-
-  for task in contribs
-    grunt.loadNpmTasks "grunt-contrib-#{task}"
-
-  grunt.registerTask 'default', ['stylus', 'coffee', 'jst']
-  grunt.registerTask 'build', ['default', 'copy', 'uglify']
+  require('load-grunt-tasks')(grunt)
